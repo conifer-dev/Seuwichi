@@ -21,7 +21,7 @@ public struct emptyState: State {
 
 public struct stateMachine {
     public var states: [String: State] = [:]
-    public var currentState:State
+    public var currentState:State = emptyState()
     public var getCurrentState: State {
         get { return currentState }
     }
@@ -53,7 +53,7 @@ extension stateMachine {
     public mutating func change(id: String) {
         currentState.exit()
         guard var nextState:State = states[id] else {
-            assertionFailure("No state found!")
+            assertionFailure("No state found! Please ensure you're passing the correct State ID!")
             return
         } 
         nextState.enter()
