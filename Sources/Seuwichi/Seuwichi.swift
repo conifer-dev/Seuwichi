@@ -26,9 +26,7 @@ public struct stateMachine {
         get { return currentState }
     }
 
-    public init(currentState: State) {
-        self.currentState = currentState
-    }
+    public init() { }
 }
 
 extension stateMachine {
