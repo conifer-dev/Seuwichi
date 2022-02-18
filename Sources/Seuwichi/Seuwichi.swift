@@ -21,9 +21,13 @@ public struct emptyState: State {
 
 public struct stateMachine {
     public var states: [String: State] = [:]
-    public var currentState:State = emptyState()
+    public var currentState:State
     public var getCurrentState: State {
         get { return currentState }
+    }
+
+    public init(currentState: State) {
+        self.currentState = currentState
     }
 }
 
