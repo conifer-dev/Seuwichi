@@ -6,16 +6,16 @@ public protocol State {
     func change(id: String)
 }
 
-internal struct emptyState: State {
-    mutating func update() {}
+public struct emptyState: State {
+    public mutating func update() {}
 
-    mutating func handleInput() {}
+    public mutating func handleInput() {}
 
-    mutating func enter() {}
+    public mutating func enter() {}
 
-    mutating func exit() {}
+    public mutating func exit() {}
 
-    func change(id: String) {}
+    public func change(id: String) {}
 }
 
 
