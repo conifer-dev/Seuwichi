@@ -20,9 +20,9 @@ public struct emptyState: State {
 
 
 public struct stateMachine {
-    var states: [String: State] = [:]
-    var currentState:State = emptyState()
-    var getCurrentState: State {
+    public var states: [String: State] = [:]
+    public var currentState:State = emptyState()
+    public var getCurrentState: State {
         get { return currentState }
     }
 }
