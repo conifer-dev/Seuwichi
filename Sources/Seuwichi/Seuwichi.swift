@@ -1,29 +1,29 @@
 public protocol State {
     mutating func update()
+    mutating func render()
     mutating func handleInput()
-    mutating func enter()
-    mutating func exit()
-    func change(id: String)
+    mutating func onEnter()
+    mutating func onExit()
 }
 
-public struct emptyState: State {
-    public mutating func update() {}
+internal struct voidState: State {
+    mutating func update() { }
 
-    public mutating func handleInput() {}
+    mutating func render() { }
 
-    public mutating func enter() {}
+    mutating func handleInput() { }
 
-    public mutating func exit() {}
+    mutating func onEnter() { }
 
-    public func change(id: String) {}
+    mutating func onExit() { }
 }
 
 
 public struct stateMachine {
     public var states: [String: State] = [:] // Dictionary that holds all states created by user.
-    public var currentState:State = emptyState() // Empty state is used when state machine is initialised to avoid all the null checks.
+    public var currentState:State = voidState() // Empty state is used when state machine is initialised to avoid all the null checks.
     public var getCurrentState: State { // Returns what state we're currently in.
-        get { return currentState }
+        get { return currentState}
     }
 
     public init() { }
@@ -53,12 +53,12 @@ extension stateMachine {
 extension stateMachine {
     /// Change from current state to another one present in the state machines dictionary.
     public mutating func change(id: String) {
-        currentState.exit()
+        currentState.onExit()
         guard var nextState:State = states[id] else {
             assertionFailure("No state found! Please ensure you're passing the correct State ID!")
             return
         } 
-        nextState.enter()
+        nextState.onEnter()
         currentState = nextState
     }
 }
@@ -67,6 +67,12 @@ extension stateMachine {
     /// States own update function.
     public mutating func update() {
         currentState.update()
+    }
+}
+
+extension stateMachine {
+    public mutating func render() {
+        currentState.render()
     }
 }
 
