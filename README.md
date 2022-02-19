@@ -12,10 +12,14 @@ Instructions
 =====
 Setting up Seuwichi is very easy and using it is even easier!
 
-Firstly make sure you added Seuwichi as your dependency package!
+Make sure you added Seuwichi as your dependency package and imported to your file!
 
 ```swift
 .package(url: "https://github.com/conifer-dev/Seuwichi.git", .branch("main"))
+```
+
+```swift
+import Seuwichi
 ```
 
 Firstly, our state machine has to be initialised! Once initialised, the state machine is set to a void state that represents an empty state that will be no longer part of the state machine upon changing the state.
