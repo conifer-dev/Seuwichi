@@ -25,7 +25,7 @@ import Seuwichi
 Firstly, our state machine has to be initialised! Once initialised, the state machine is set to a void state that represents an empty state that will be no longer part of the state machine upon changing the state.
 
 ```swift
-var myStateMachine = stateMachine() // Initialisation of our state machine
+var myStateMachine = StateMachine() // Initialisation of our state machine
 ```
 
 Now we have to create a new state and add it to our state machine. It's very easy to do!
@@ -33,6 +33,10 @@ Now we have to create a new state and add it to our state machine. It's very eas
 struct MenuState: State {
     mutating func update() { 
         // handle your update here... 
+    }
+    
+    mutating func render() {
+        // handle your render here... 
     }
 
     mutating func onEnter() {
@@ -47,6 +51,10 @@ struct MenuState: State {
 struct GameState: State {
     mutating func update() { 
         // handle your update here... 
+    }
+    
+    mutating func render() {
+        // handle your render here... 
     }
 
     mutating func onEnter() {
@@ -87,6 +95,7 @@ Down below we will explain thorougly each function (and those not mentioned abov
 | Function | Description |
 |---|---|
 | __.update()__ | All updates within the state are called here e.g. player movement. |
+| __.render()__ | All rendering within the state are called here e.g. player sprite or a menu state. |
 | __.onEnter()__ | onEnter function is called in on every state change, therefore its useful to use onEnter to initialise your code or set your animation to reflect what animation state your entity will be in. |
 | __.onExit()__ | The opposite of onEnter(). This function will be also called during the change of states |
 
