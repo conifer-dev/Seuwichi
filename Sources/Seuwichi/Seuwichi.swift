@@ -1,5 +1,6 @@
 public protocol State {
     mutating func update()
+    mutating func render()
     mutating func onEnter()
     mutating func onExit()
 }
@@ -7,13 +8,15 @@ public protocol State {
 internal struct voidState: State {
     mutating func update() { }
 
+    mutating func render() { }
+
     mutating func onEnter() { }
 
     mutating func onExit() { }
 }
 
 
-public struct stateMachine {
+public struct StateMachine {
     private var states: [String: State] = [:] // Dictionary that holds all states created by user.
     private var currentState:State = voidState() // Void state is used when state machine is initialised to avoid all the unnecessary null checks.
     public var getCurrentState: State { // Returns what state we're currently in.
@@ -23,28 +26,28 @@ public struct stateMachine {
     public init() { }
 }
 
-extension stateMachine {
+extension StateMachine {
     /// Add a new state to the state machine.
     public mutating func add(id: String, state: State) {
         states[id] = state
     }
 }
 
-extension stateMachine {
+extension StateMachine {
     /// Remove any state from the state machine.
     public mutating func remove(id: String) {
         states.removeValue(forKey: id)
     }
 }
 
-extension stateMachine {
+extension StateMachine {
     /// Remove all states from the state machine.
     public mutating func clear() {
         states.removeAll()
     }
 }
 
-extension stateMachine {
+extension StateMachine {
     /// Change from current state to another one present in the state machines dictionary.
     public mutating func change(id: String) {
         currentState.onExit()
@@ -57,9 +60,16 @@ extension stateMachine {
     }
 }
 
-extension stateMachine {
+extension StateMachine {
     /// States own update function.
     public mutating func update() {
         currentState.update()
+    }
+}
+
+extension StateMachine {
+    /// State render function.
+    public mutating func render() {
+        currentState.render()
     }
 }
