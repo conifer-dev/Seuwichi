@@ -1,6 +1,7 @@
-# Seuwichi - Plain simple State Machine.
+# Seuwichi 스위치 - Plain simple State Machine.
 
-# About
+About
+=====
 *A very simplistic state machine system* for Swift while mainly used with [Raylib on Swift.](https://github.com/STREGAsGate/Raylib)
 
 Seuwichi allows you to easily create, manage and transition states at ease without any complexities. It was created with ease of usability in mind.
