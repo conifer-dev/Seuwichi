@@ -25,10 +25,10 @@ import Seuwichi
 Firstly, our state machine has to be initialised! Once initialised, the state machine is set to a void state that represents an empty state that will be no longer part of the state machine upon changing the state.
 
 ```swift
-var myStateManager = stateMachine() // Initialisation of our state manager
+var myStateMachine = stateMachine() // Initialisation of our state machine
 ```
 
-Now we have to create a new state and add it to our state manager. It's very easy to do!
+Now we have to create a new state and add it to our state machine. It's very easy to do!
 ```swift
 struct Menu: State {
     mutating func update() { 
@@ -58,16 +58,16 @@ struct Game: State {
     }
 }
 ```
-Here we have two newly created (and empty for example purposes) states using the "State" protocol, every state has to adopt the State protocol! Now we have to add them to our state manager/machine!
+Here we have two newly created (and empty for example purposes) states using the "State" protocol, every state has to adopt the State protocol! Now we have to add them to our state machine!
 
 ```swift
-myStateManager.add(id: "gameStart", state: GameStart()) // Adding our newly created state to our state machine/manager. All states are stored within a dictionary.
-myStateManager.add(id: "menuState", state: MenuState())
+myStateMachine.add(id: "gameStart", state: GameStart()) // Adding our newly created state to our state machine. All states are stored within a dictionary.
+myStateMachine.add(id: "menuState", state: MenuState())
 ```
 Now that our state has been successfully added, we're ready to change our states! To change our state all we need to do is pass through a `.change()` function to our state machine.
 
 ```swift
-myStateManager.change(id: "gameStart") // .change() function takes in a single parameter "id" that looks into our dictionary of states previously added.
+myStateMachine.change(id: "gameStart") // .change() function takes in a single parameter "id" that looks into our dictionary of states previously added.
 // Beware that attempting to change to a state that does not exist will result in an error!
 ```
 And you're done! You've successfully created a state machine, added a state to the machine and changed the state! It's as simple as that.
@@ -77,10 +77,10 @@ Down below we will explain thorougly each function (and those not mentioned abov
 
 | Function    | Example               | Description                                                                                                                                                                               |
 | ----------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| __.add(id: String, state: State)__ | `myStateManager.add(id: "gameState", state: GameStart())`  | Adds a newly created state to our state machine.
-| __.remove(id: String)__ | `myStateManager.remove("menuState")`   | Removes the passed state ID from our state machine.  |
-| __.clear()__   | `myStateManager.clear()` | Removes all entries of States previously added to our state machine.                                              |
-| __.change(id: String)__ | `myStateManager.change(id: "gameState")`  | Changing to a passed through game state (ID). This will automatically call states own .onEnter() function. Passing through nonexistent ID will result in an error! Make sure you added your state to the state machine prior to changing.| 
+| __.add(id: String, state: State)__ | `myStateMachine.add(id: "gameState", state: GameStart())`  | Adds a newly created state to our state machine.
+| __.remove(id: String)__ | `myStateMachine.remove("menuState")`   | Removes the passed state ID from our state machine.  |
+| __.clear()__   | `myStateMachine.clear()` | Removes all entries of States previously added to our state machine.                                              |
+| __.change(id: String)__ | `myStateMachine.change(id: "gameState")`  | Changing to a passed through game state (ID). This will automatically call states own .onEnter() function. Passing through nonexistent ID will result in an error! Make sure you added your state to the state machine prior to changing.| 
 
 ### State Functions
 
