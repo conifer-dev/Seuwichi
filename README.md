@@ -30,7 +30,7 @@ var myStateMachine = stateMachine() // Initialisation of our state machine
 
 Now we have to create a new state and add it to our state machine. It's very easy to do!
 ```swift
-struct Menu: State {
+struct MenuState: State {
     mutating func update() { 
         // handle your update here... 
     }
@@ -44,7 +44,7 @@ struct Menu: State {
     }
 }
 
-struct Game: State {
+struct GameState: State {
     mutating func update() { 
         // handle your update here... 
     }
@@ -61,7 +61,7 @@ struct Game: State {
 Here we have two newly created (and empty for example purposes) states using the "State" protocol, every state has to adopt the State protocol! Now we have to add them to our state machine!
 
 ```swift
-myStateMachine.add(id: "gameStart", state: GameStart()) // Adding our newly created state to our state machine. All states are stored within a dictionary.
+myStateMachine.add(id: "gameStart", state: GameState()) // Adding our newly created state to our state machine. All states are stored within a dictionary.
 myStateMachine.add(id: "menuState", state: MenuState())
 ```
 Now that our state has been successfully added, we're ready to change our states! To change our state all we need to do is pass through a `.change()` function to our state machine.
