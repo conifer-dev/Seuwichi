@@ -20,8 +20,8 @@ internal struct voidState: State {
 
 
 public struct stateMachine {
-    public var states: [String: State] = [:] // Dictionary that holds all states created by user.
-    public var currentState:State = voidState() // Empty state is used when state machine is initialised to avoid all the null checks.
+    private var states: [String: State] = [:] // Dictionary that holds all states created by user.
+    private var currentState:State = voidState() // Void state is used when state machine is initialised to avoid all the null checks.
     public var getCurrentState: State { // Returns what state we're currently in.
         get { return currentState}
     }
