@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://i.imgur.com/uYwVATH.png" />
-</p>
+# Seuwichi - Plain simple State Machine.
 
 # About
 *A very simplistic state machine system* for Swift while mainly used with [Raylib on Swift.](https://github.com/STREGAsGate/Raylib)
@@ -58,7 +56,37 @@ struct Game: State {
 Here we have two newly created (and empty for example purposes) states using the "State" protocol, every state has to adopt the State protocol! Now we have to add them to our state manager/machine!
 
 ```swift
-myStateManager.add(id: "game", state: Game()) // Adding our newly created state to our state machine/manager. All states are stored within a dictionary.
-myStateManager.add(id: "game", state: Menu())
+myStateManager.add(id: "gameStart", state: GameStart()) // Adding our newly created state to our state machine/manager. All states are stored within a dictionary.
+myStateManager.add(id: "menuState", state: MenuState())
 ```
-Now that our state has been successfully added, we're ready to change our states when needed!
+Now that our state has been successfully added, we're ready to change our states! To change our state all we need to do is pass through a `.change()` function to our state machine.
+
+```swift
+myStateManager.change(id: "gameStart") // .change() function takes in a single parameter "id" that looks into our dictionary of states previously added.
+// Beware that attempting to change to a state that does not exist will result in an error!
+```
+And you're done! You've successfully created a state machine, added a state to the machine and changed the state! It's as simple as that.
+Down below we will explain thorougly each function (and those not mentioned above) and what they do.
+
+### State Machine Functions
+
+| Function    | Example               | Description                                                                                                                                                                               |
+| ----------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __.add(id: String, state: State)__ | `myStateManager.add(id: "gameState", state: GameStart())`  | Adds a newly created state to our state machine.
+| __.remove(id: String)__ | `myStateManager.remove("menuState")`   | Removes the passed state ID from our state machine.  |
+| __.clear()__   | `myStateManager.clear()` | Removes all entries of States previously added to our state machine.                                              |
+| __.change(id: String)__ | `myStateManager.change(id: "gameState")`  | Changing to a passed through game state (ID). This will automatically call states own .onEnter() function. Passing through nonexistent ID will result in an error! Make sure you added your state to the state machine prior to changing.| 
+
+### State Functions
+
+| Function | Description |
+|---|---|
+| __.update()__ | All updates within the state are called here e.g. player movement. |
+| __.onEnter()__ | onEnter function is called in on every state change, therefore its useful to use onEnter to initialise your code or set your animation to reflect what animation state your entity will be in. |
+| __.onExit()__ | The opposite of onEnter(). This function will be also called during the change of states |
+
+Closing notes
+=====
+This state machine is **very** simple, and I hope that many new programmers/game devs can look at the code and understand how to create one themselves, but also use it if they feel like it. This was mainly created for my own purposes as I re-create one of my Love2D games in [Raylib on Swift.](https://github.com/STREGAsGate/Raylib). Please feel free to send PRs on how to improve Seuwichi and perhaps how to make it even more *Swifty*.
+
+Creating this state machine taught me a little bit more about protocols which was also the objective of this project.
