@@ -1,17 +1,11 @@
 public protocol State {
     mutating func update()
-    mutating func render()
-    mutating func handleInput()
     mutating func onEnter()
     mutating func onExit()
 }
 
 internal struct voidState: State {
     mutating func update() { }
-
-    mutating func render() { }
-
-    mutating func handleInput() { }
 
     mutating func onEnter() { }
 
@@ -21,7 +15,7 @@ internal struct voidState: State {
 
 public struct stateMachine {
     private var states: [String: State] = [:] // Dictionary that holds all states created by user.
-    private var currentState:State = voidState() // Void state is used when state machine is initialised to avoid all the null checks.
+    private var currentState:State = voidState() // Void state is used when state machine is initialised to avoid all the unnecessary null checks.
     public var getCurrentState: State { // Returns what state we're currently in.
         get { return currentState}
     }
@@ -67,18 +61,5 @@ extension stateMachine {
     /// States own update function.
     public mutating func update() {
         currentState.update()
-    }
-}
-
-extension stateMachine {
-    public mutating func render() {
-        currentState.render()
-    }
-}
-
-extension stateMachine {
-    /// States own input handling.
-    public mutating func handleInput() {
-        currentState.handleInput()
     }
 }
