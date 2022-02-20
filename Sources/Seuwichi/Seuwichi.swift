@@ -18,31 +18,24 @@ internal struct voidState: State {
 
 public struct StateMachine {
     private var states: [String: State] = [:] // Dictionary that holds all states created by user.
-    private var currentState:State = voidState() // Void state is used when state machine is initialised to avoid all the unnecessary null checks.
-    public var getCurrentState: State { // Returns what state we're currently in.
-        get { return currentState}
-    }
+    public private(set) var _currentState: State = voidState() // Void state is used when state machine is initialised to avoid all the unnecessary null checks.
+    public var getCurrentState: State {_currentState} // Returns what state we're currently in.
+
 
     public init() { }
-}
 
-extension StateMachine {
     /// Add a new state to the state machine.
-    public mutating func add(id: String, state: State) {
+    public mutating func insertState(_ state: State, withID id: String) {
         states[id] = state
     }
-}
 
-extension StateMachine {
     /// Remove any state from the state machine.
-    public mutating func remove(id: String) {
+    public mutating func removeState(id: String) {
         states.removeValue(forKey: id)
     }
-}
 
-extension StateMachine {
     /// Remove all states from the state machine.
-    public mutating func clear() {
+    public mutating func clearStates() {
         states.removeAll()
     }
 }
@@ -50,26 +43,26 @@ extension StateMachine {
 extension StateMachine {
     /// Change from current state to another one present in the state machines dictionary.
     public mutating func change(id: String) {
-        currentState.onExit()
+        _currentState.onExit()
         guard var nextState:State = states[id] else {
             assertionFailure("No state found! Please ensure you're passing the correct State ID!")
             return
         } 
         nextState.onEnter()
-        currentState = nextState
+        _currentState = nextState
     }
 }
 
 extension StateMachine {
     /// States own update function.
     public mutating func update() {
-        currentState.update()
+        _currentState.update()
     }
 }
 
 extension StateMachine {
     /// State render function.
     public mutating func render() {
-        currentState.render()
+        _currentState.render()
     }
 }
