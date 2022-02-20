@@ -42,7 +42,7 @@ public struct StateMachine {
 
 extension StateMachine {
     /// Change from current state to another one present in the state machines dictionary.
-    public mutating func change(id: String) {
+    public mutating func changeState(id: String) {
         _currentState.onExit()
         guard var nextState:State = states[id] else {
             assertionFailure("No state found! Please ensure you're passing the correct State ID!")
