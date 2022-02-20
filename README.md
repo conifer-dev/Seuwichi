@@ -69,13 +69,13 @@ struct GameState: State {
 Here we have two newly created (and empty for example purposes) states using the "State" protocol, every state has to adopt the State protocol! Now we have to add them to our state machine!
 
 ```swift
-myStateMachine.add(id: "gameStart", state: GameState()) // Adding our newly created state to our state machine. All states are stored within a dictionary.
-myStateMachine.add(id: "menuState", state: MenuState())
+myStateManager.insertState(gameState(), withID: "gameState") // Adding our newly created state to our state machine. All states are stored within a dictionary.
+myStateManager.insertState(menuState(), withID: "menuState")
 ```
-Now that our state has been successfully added, we're ready to change our states! To change our state all we need to do is pass through a `.change()` function to our state machine.
+Now that our state has been successfully added, we're ready to change our states! To change our state all we need to do is pass through a `.changeState()` function to our state machine.
 
 ```swift
-myStateMachine.change(id: "gameStart") // .change() function takes in a single parameter "id" that looks into our dictionary of states previously added.
+myStateMachine.changeState(id: "gameStart") // .changeState() function takes in a single parameter "id" that looks into our dictionary of states previously added.
 // Beware that attempting to change to a state that does not exist will result in an error!
 ```
 And you're done! You've successfully created a state machine, added a state to the machine and changed the state! It's as simple as that.
@@ -85,10 +85,10 @@ Down below we will explain thorougly each function (and those not mentioned abov
 
 | Function    | Example               | Description                                                                                                                                                                               |
 | ----------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| __.add(id: String, state: State)__ | `myStateMachine.add(id: "gameState", state: GameStart())`  | Adds a newly created state to our state machine.
-| __.remove(id: String)__ | `myStateMachine.remove("menuState")`   | Removes the passed state ID from our state machine.  |
-| __.clear()__   | `myStateMachine.clear()` | Removes all entries of States previously added to our state machine.                                              |
-| __.change(id: String)__ | `myStateMachine.change(id: "gameState")`  | Changing to a passed through game state (ID). This will automatically call states own .onEnter() function. Passing through nonexistent ID will result in an error! Make sure you added your state to the state machine prior to changing.| 
+| __.insertState(_ state: State, withID id: String)__ | `myStateMachine.changeState(id: "gameStart")`  | Adds a newly created state to our state machine.
+| __.removeState(id: String)__ | `myStateMachine.removeState("menuState")`   | Removes the passed state ID from our state machine.  |
+| __.clearStates()__   | `myStateMachine.clearStates()` | Removes all entries of States previously added to our state machine.                                              |
+| __.changeState(id: String)__ | `myStateMachine.changeState(id: "gameState")`  | Changing to a passed through game state (ID). This will automatically call states own .onEnter() function. Passing through nonexistent ID will result in an error! Make sure you added your state to the state machine prior to changing.| 
 
 ### State Functions
 
