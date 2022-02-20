@@ -85,7 +85,7 @@ Down below we will explain thorougly each function (and those not mentioned abov
 
 | Function    | Example               | Description                                                                                                                                                                               |
 | ----------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| __.insertState(_ state: State, withID id: String)__ | `myStateMachine.changeState(id: "gameStart")`  | Adds a newly created state to our state machine. |
+| **.insertState(_ state: State, withID id: String)** | `myStateMachine.changeState(id: "gameStart")`  | Adds a newly created state to our state machine. |
 | __.removeState(id: String)__ | `myStateMachine.removeState("menuState")`   | Removes the passed state ID from our state machine.  |
 | __.clearStates()__   | `myStateMachine.clearStates()` | Removes all entries of States previously added to our state machine.                                              |
 | __.changeState(id: String)__ | `myStateMachine.changeState(id: "gameState")`  | Changing to a passed through game state (ID). This will automatically call states own .onEnter() function. Passing through nonexistent ID will result in an error! Make sure you added your state to the state machine prior to changing.| 
