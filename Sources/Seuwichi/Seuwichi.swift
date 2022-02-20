@@ -38,9 +38,7 @@ public struct StateMachine {
     public mutating func clearStates() {
         states.removeAll()
     }
-}
-
-extension StateMachine {
+    
     /// Change from current state to another one present in the state machines dictionary.
     public mutating func changeState(id: String) {
         _currentState.onExit()
@@ -51,17 +49,13 @@ extension StateMachine {
         nextState.onEnter()
         _currentState = nextState
     }
-}
-
-extension StateMachine {
+    
     /// States own update function.
     public mutating func update() {
         _currentState.update()
     }
-}
-
-extension StateMachine {
-    /// State render function.
+    
+        /// State render function.
     public mutating func render() {
         _currentState.render()
     }
