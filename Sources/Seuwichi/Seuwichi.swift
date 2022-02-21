@@ -1,8 +1,8 @@
 public protocol State {
-    mutating func update()
-    mutating func render()
-    mutating func onEnter()
-    mutating func onExit()
+    func update()
+    func render()
+    func onEnter()
+    func onExit()
 }
 
 internal class voidState: State {
@@ -38,12 +38,16 @@ open class StateMachine {
         self.states.removeAll()
     }
 
-    deinit {
-        self.clearStates()
+    /// States own update function.
+    public func update() {
+        self._currentState.update()
     }
-}
 
-extension StateMachine {
+    /// State render function.
+    public func render() {
+        self._currentState.render()
+    }
+    
     /// Change from current state to another one present in the state machines dictionary.
     public func changeState(id: String) {
         self._currentState.onExit()
@@ -54,18 +58,8 @@ extension StateMachine {
         nextState.onEnter()
         self._currentState = nextState
     }
-}
 
-extension StateMachine {
-    /// States own update function.
-    public func update() {
-        self._currentState.update()
-    }
-}
-
-extension StateMachine {
-    /// State render function.
-    public func render() {
-        self._currentState.render()
+    deinit {
+        self.clearStates()
     }
 }
