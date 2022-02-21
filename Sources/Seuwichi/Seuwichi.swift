@@ -51,7 +51,7 @@ open class StateMachine {
     /// Change from current state to another one present in the state machines dictionary.
     public func changeState(id: String) {
         self._currentState.onExit()
-        guard var nextState:State = states[id] else {
+        guard let nextState:State = states[id] else {
             assertionFailure("No state found! Please ensure you're passing the correct State ID!")
             return
         } 

@@ -30,38 +30,38 @@ var myStateMachine = StateMachine() // Initialisation of our state machine
 
 Now we have to create a new state and add it to our state machine. It's very easy to do!
 ```swift
-struct MenuState: State {
-    mutating func update() { 
+class MenuState: State {
+    func update() { 
         // handle your update here... 
     }
     
-    mutating func render() {
+    func render() {
         // handle your render here... 
     }
 
-    mutating func onEnter() {
+    func onEnter() {
         // any functionalities/initialisation you want to happen when you enter/switch to the state...
     }
 
-    mutating func onExit() {
+    func onExit() {
         // any functionalities/initialisation you want to happen when you exit/switch from the state...
     }
 }
 
-struct GameState: State {
-    mutating func update() { 
+class GameState: State {
+    func update() { 
         // handle your update here... 
     }
     
-    mutating func render() {
+    func render() {
         // handle your render here... 
     }
 
-    mutating func onEnter() {
+    func onEnter() {
         // any functionalities/initialisation you want to happen when you enter/switch to the state...
     }
 
-    mutating func onExit() {
+    func onExit() {
         // any functionalities/initialisation you want to happen when you exit/switch from the state...
     }
 }
