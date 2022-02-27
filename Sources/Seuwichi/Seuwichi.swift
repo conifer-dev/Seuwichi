@@ -1,12 +1,12 @@
 public protocol State {
-    func update()
+    func update(deltaTime dt: Float)
     func render()
     func onEnter()
     func onExit()
 }
 
 internal class voidState: State {
-    func update() { }
+    func update(deltaTime dt: Float) { }
 
     func render() { }
 
@@ -39,8 +39,8 @@ open class StateMachine {
     }
 
     /// States own update function.
-    public func update() {
-        self._currentState.update()
+    public func update(deltaTime dt: Float) {
+        self._currentState.update(deltaTime: dt)
     }
 
     /// State render function.

@@ -31,7 +31,7 @@ var myStateMachine = StateMachine() // Initialisation of our state machine
 Now we have to create a new state and add it to our state machine. It's very easy to do!
 ```swift
 class MenuState: State {
-    func update() { 
+    func update(deltaTime dt: Float) { 
         // handle your update here... 
     }
     
@@ -49,7 +49,7 @@ class MenuState: State {
 }
 
 class GameState: State {
-    func update() { 
+    func update(deltaTime dt: Float) { 
         // handle your update here... 
     }
     
@@ -92,12 +92,12 @@ Down below we will explain thorougly each function (and those not mentioned abov
 
 ### State Functions
 
-| Function | Description |
-|---|---|
-| __.update()__ | All updates within the state are called here e.g. player movement. |
-| __.render()__ | All rendering within the state are called here e.g. player sprite or a menu state. |
-| __.onEnter()__ | onEnter function is called in on every state change, therefore its useful to use onEnter to initialise your code or set your animation to reflect what animation state your entity will be in. |
-| __.onExit()__ | The opposite of onEnter(). This function will be also called during the change of states |
+| Function                         | Description |
+|----------------------------------|---|
+| __.update(deltaTime dt: Float)__ | All updates within the state are called here e.g. player movement. |
+| __.render()__                    | All rendering within the state are called here e.g. player sprite or a menu state. |
+| __.onEnter()__                   | onEnter function is called in on every state change, therefore its useful to use onEnter to initialise your code or set your animation to reflect what animation state your entity will be in. |
+| __.onExit()__                    | The opposite of onEnter(). This function will be also called during the change of states |
 
 Closing notes
 =====
