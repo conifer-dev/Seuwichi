@@ -1,8 +1,8 @@
 public protocol State {
-   @inlinable func update(deltaTime dt: Float)
-   @inlinable func render()
-   @inlinable func onEnter()
-   @inlinable func onExit()
+   @inlinable mutating func update(deltaTime dt: Float)
+   @inlinable mutating func render()
+   @inlinable mutating func onEnter()
+   @inlinable mutating func onExit()
 }
 
 internal class voidState: State {
