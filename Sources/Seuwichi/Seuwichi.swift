@@ -1,8 +1,8 @@
 public protocol State {
-    func update(deltaTime dt: Float)
-    func render()
-    func onEnter()
-    func onExit()
+   @inlinable func update(deltaTime dt: Float)
+   @inlinable func render()
+   @inlinable func onEnter()
+   @inlinable func onExit()
 }
 
 internal class voidState: State {
@@ -24,7 +24,7 @@ open class StateMachine {
     public init() { }
 
     /// Add a new state to the state machine.
-    public func insertState(_ state: State, withID id: String) {
+   public func insertState(_ state: State, withID id: String) {
         self.states[id] = state
     }
 
